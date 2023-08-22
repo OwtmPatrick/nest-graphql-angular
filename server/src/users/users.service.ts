@@ -25,15 +25,18 @@ export class UsersService {
     }
 
     try {
-      await this.userRepository.insert({
+      const user = await this.userRepository.insert({
         ...createUserDto,
         firstName: '',
         lastName: '',
       });
 
+      const userId = user.identifiers[0].id;
+
       return {
         statusCode: HttpStatus.CREATED,
         message: `The user with login ${createUserDto.login} was successfully created`,
+        userId,
       };
     } catch (e) {
       throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
