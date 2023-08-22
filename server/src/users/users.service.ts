@@ -60,6 +60,18 @@ export class UsersService {
     }
   }
 
+  async findUserByLogin(login: string) {
+    try {
+      return await this.userRepository
+        .createQueryBuilder('user')
+        .where('user.login = :login', { login })
+        .addSelect('user.password')
+        .getOne();
+    } catch (e) {
+      throw new HttpException('Unable to find user', HttpStatus.NOT_FOUND);
+    }
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto) {
     try {
       await this.userRepository.update(id, updateUserDto);
