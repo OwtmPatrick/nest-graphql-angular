@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-  Post,
+  //   Post,
   Body,
   Patch,
   Param,
@@ -13,7 +13,7 @@ import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 // import * as bcrypt from 'bcrypt';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('users')
 export class UsersController {
