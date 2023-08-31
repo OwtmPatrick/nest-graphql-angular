@@ -1,0 +1,53 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Comment {
+  id: String!
+  text: String!
+  property: Property!
+}
+
+type Property {
+  id: String!
+  name: String!
+  city: String!
+  state: String!
+  photo: String!
+  availableUnits: Int!
+  wifi: Boolean!
+  laundry: Boolean!
+  comments: [Comment!]!
+}
+
+type Query {
+  properties: [Property!]!
+  property(id: String!): Property!
+}
+
+type Mutation {
+  createProperty(createPropertyInput: CreatePropertyInput!): Property!
+  updateProperty(updatePropertyInput: UpdatePropertyInput!): Property!
+  removeProperty(id: String!): Property!
+}
+
+input CreatePropertyInput {
+  name: String!
+  city: String!
+  state: String!
+  photo: String!
+  availableUnits: Int!
+  wifi: Boolean!
+  laundry: Boolean!
+}
+
+input UpdatePropertyInput {
+  name: String
+  city: String
+  state: String
+  photo: String
+  availableUnits: Float
+  wifi: Boolean
+  laundry: Boolean
+  id: String!
+}
