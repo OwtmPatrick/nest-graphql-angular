@@ -20,9 +20,15 @@ type Property {
   comments: [Comment!]!
 }
 
+type State {
+  id: String!
+  title: String!
+}
+
 type Query {
   properties: [Property!]!
   property(id: String!): Property!
+  states: [State!]!
 }
 
 type Mutation {

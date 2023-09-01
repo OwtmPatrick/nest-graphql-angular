@@ -25,6 +25,7 @@ export class PropertiesResolver {
 
     return this.commentsService.findByProperty(id);
   }
+
   @Mutation(() => Property)
   createProperty(
     @Args('createPropertyInput') createPropertyInput: CreatePropertyInput,

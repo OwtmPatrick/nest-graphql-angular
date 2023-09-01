@@ -13,10 +13,7 @@ export class PropertiesService {
   ) {}
   async create(createPropertyInput: CreatePropertyInput) {
     try {
-      await this.propertyRepository.insert({
-        ...createPropertyInput,
-        comments: [],
-      });
+      await this.propertyRepository.insert(createPropertyInput);
 
       return createPropertyInput;
     } catch (e) {

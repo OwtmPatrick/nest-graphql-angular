@@ -8,6 +8,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { PropertiesModule } from './properties/properties.module';
 import { CommentsModule } from './comments/comments.module';
+import { StatesModule } from './states/states.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CommentsModule } from './comments/comments.module';
     AuthModule,
     PropertiesModule,
     CommentsModule,
+    StatesModule,
   ],
 })
 export class AppModule {}
