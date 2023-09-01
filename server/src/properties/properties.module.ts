@@ -4,7 +4,7 @@ import { PropertiesService } from './properties.service';
 import { PropertiesResolver } from './properties.resolver';
 import { PropertiesRepositoryModule } from '../db/repositories/properties/properties.repository.module';
 import { Property } from './entities/property.entity';
-import { CommentsModule } from 'src/comments/comments.module';
+import { CommentsModule } from '../comments/comments.module';
 
 @Module({
   imports: [
