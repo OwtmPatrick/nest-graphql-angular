@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Property } from './entities/property.entity';
 import { CreatePropertyInput } from './dto/create-property.input';
 import { UpdatePropertyInput } from './dto/update-property.input';
+import { FilterPropertyInput } from './dto/filter-property.input';
 
 @Injectable()
 export class PropertiesService {
@@ -21,8 +22,28 @@ export class PropertiesService {
     }
   }
 
-  async findAll(): Promise<Property[]> {
-    return await this.propertyRepository.find();
+  async filter(filterPropertyInput: FilterPropertyInput): Promise<Property[]> {
+    const { search, state, wifi, laundry } = filterPropertyInput;
+
+    const qb = this.propertyRepository.createQueryBuilder('property');
+
+    if (search) {
+      qb.andWhere('property.name like :name', { name: `%${search}%` });
+    }
+
+    if (state) {
+      qb.andWhere('property.state like :state', { state: `%${state}%` });
+    }
+
+    if (wifi) {
+      qb.andWhere('property.wifi = :wifi', { wifi: true });
+    }
+
+    if (laundry) {
+      qb.andWhere('property.laundry = :laundry', { laundry: true });
+    }
+
+    return await qb.getMany();
   }
 
   async findOne(id: string): Promise<Property> {

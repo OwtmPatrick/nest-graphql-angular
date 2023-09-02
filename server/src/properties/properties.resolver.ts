@@ -11,6 +11,7 @@ import { CommentsService } from '../comments/comments.service';
 import { Property } from './entities/property.entity';
 import { CreatePropertyInput } from './dto/create-property.input';
 import { UpdatePropertyInput } from './dto/update-property.input';
+import { FilterPropertyInput } from './dto/filter-property.input';
 
 @Resolver(() => Property)
 export class PropertiesResolver {
@@ -34,8 +35,10 @@ export class PropertiesResolver {
   }
 
   @Query(() => [Property], { name: 'properties' })
-  findAll() {
-    return this.propertiesService.findAll();
+  filter(
+    @Args('filterPropertyInput') filterPropertyInput: FilterPropertyInput,
+  ) {
+    return this.propertiesService.filter(filterPropertyInput);
   }
 
   @Query(() => Property, { name: 'property' })

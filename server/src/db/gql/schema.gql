@@ -26,9 +26,16 @@ type State {
 }
 
 type Query {
-  properties: [Property!]!
+  properties(filterPropertyInput: FilterPropertyInput!): [Property!]!
   property(id: String!): Property!
   states: [State!]!
+}
+
+input FilterPropertyInput {
+  search: String
+  state: String
+  wifi: Boolean
+  laundry: Boolean
 }
 
 type Mutation {
