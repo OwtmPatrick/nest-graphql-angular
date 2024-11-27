@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comment } from './entities/comment.entity';
 import { CreateCommentInput } from './dto/create-comment.input';
+import { UpdateCommentInput } from './dto/update-comment.input';
 import { PropertiesRepository } from '../db/repositories/properties/properties.repository';
 import { UsersRepository } from '../db/repositories/users/users.repository';
 import { Property } from '../properties/entities/property.entity';
@@ -64,5 +65,37 @@ export class CommentsService {
     }
 
     return comment;
+  }
+
+  async update(id: string, updateCommentInput: UpdateCommentInput) {
+    const comment = await this.commentsRepository.findOne({ where: { id } });
+
+    if (!comment) {
+      throw new HttpException('Comment not found', HttpStatus.NOT_FOUND);
+    }
+
+    await this.commentsRepository.update(id, updateCommentInput);
+
+    return await this.commentsRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+
+  async remove(id: string): Promise<Comment> {
+    const comment = await this.commentsRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!comment) {
+      throw new HttpException('Comment not found', HttpStatus.NOT_FOUND);
+    }
+
+    await this.commentsRepository.remove(comment);
+
+    return { ...comment, id };
   }
 }
