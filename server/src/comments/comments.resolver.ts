@@ -1,15 +1,11 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { Comment } from './entities/comment.entity';
 import { CommentsService } from './comments.service';
-import { UsersService } from '../users/users.service';
 import { CreateCommentInput } from './dto/create-comment.input';
 
 @Resolver(() => Comment)
 export class CommentsResolver {
-  constructor(
-    private readonly commentsService: CommentsService,
-    private readonly usersService: UsersService,
-  ) {}
+  constructor(private readonly commentsService: CommentsService) {}
 
   @Mutation(() => Comment)
   createComment(
