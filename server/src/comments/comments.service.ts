@@ -25,7 +25,7 @@ export class CommentsService {
   }
 
   async create(createCommentInput: CreateCommentInput) {
-    const { propertyId, userId } = createCommentInput;
+    const { propertyId, userId, text } = createCommentInput;
 
     const property = await this.propertiesRepository.findOne({
       where: {
@@ -48,15 +48,21 @@ export class CommentsService {
     }
 
     const { identifiers } = await this.commentsRepository.insert({
-      ...createCommentInput,
+      text,
       property: createCommentInput.propertyId as unknown as Property,
       user: createCommentInput.userId as unknown as User,
     });
 
-    return { id: identifiers[0].id, text: createCommentInput.text };
+    return { id: identifiers[0].id, text };
   }
 
   async findOne(id: string): Promise<Comment> {
-    return await this.commentsRepository.findOne({ where: { id } });
+    const comment = await this.commentsRepository.findOne({ where: { id } });
+
+    if (!comment) {
+      throw new HttpException('Comment not found', HttpStatus.NOT_FOUND);
+    }
+
+    return comment;
   }
 }
