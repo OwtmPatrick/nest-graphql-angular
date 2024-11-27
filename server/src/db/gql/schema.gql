@@ -2,12 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Comment {
-  id: String!
-  text: String!
-  property: Property!
-}
-
 type Property {
   id: String!
   name: String!
@@ -20,6 +14,18 @@ type Property {
   comments: [Comment!]!
 }
 
+type Comment {
+  id: String!
+  text: String!
+  property: Property!
+  user: User!
+}
+
+type User {
+  id: String!
+  comments: [Comment!]!
+}
+
 type State {
   id: String!
   title: String!
@@ -28,6 +34,7 @@ type State {
 type Query {
   properties(filterPropertyInput: FilterPropertyInput!): [Property!]!
   property(id: String!): Property!
+  comment(id: String!): Comment!
   states: [State!]!
 }
 
@@ -42,6 +49,7 @@ type Mutation {
   createProperty(createPropertyInput: CreatePropertyInput!): Property!
   updateProperty(updatePropertyInput: UpdatePropertyInput!): Property!
   removeProperty(id: String!): Property!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
 }
 
 input CreatePropertyInput {
@@ -63,4 +71,10 @@ input UpdatePropertyInput {
   wifi: Boolean
   laundry: Boolean
   id: String!
+}
+
+input CreateCommentInput {
+  text: String!
+  propertyId: String!
+  userId: String!
 }

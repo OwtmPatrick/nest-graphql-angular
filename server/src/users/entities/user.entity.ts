@@ -1,7 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Comment } from '../../comments/entities/comment.entity';
+import { ObjectType, Field } from '@nestjs/graphql';
 
+@ObjectType()
 @Entity()
 export class User {
+  @Field()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -16,4 +20,8 @@ export class User {
 
   @Column()
   lastName?: string;
+
+  @Field(() => [Comment])
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 }
