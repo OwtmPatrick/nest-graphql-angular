@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
-import { AuthService } from './auth.service';
+import { Component } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
 const GET_PROPERTIES = gql`
