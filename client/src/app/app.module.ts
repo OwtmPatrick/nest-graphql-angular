@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from '../pages/home/ui/home.component';
 import { AppRoutingModule } from './routes/routing.module';
 import { GraphQLModule } from './api/graphql.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { GET_PROPERTIES } from '../../../graphql/queries';
+import { GET_PROPERTIES } from '../api';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FilterPropertyInput } from '../../../types';
+import { FilterPropertyInput } from 'src/entities/property/model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-//   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  //   standalone: true
 })
 export class HomeComponent {
   filterForm = new FormGroup({
