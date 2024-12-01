@@ -22,10 +22,6 @@ export class HomeComponent {
 
   constructor(private readonly apollo: Apollo) {}
 
-  submit() {
-    this.getProperties(this.filterForm.value as FilterPropertyInput);
-  }
-
   getProperties(filterPropertyInput: FilterPropertyInput) {
     this.querySubscription = this.apollo
       .watchQuery({
@@ -39,10 +35,16 @@ export class HomeComponent {
           data: { properties },
         } = result;
 
-        console.log(properties)
-
         this.properties = properties;
       });
+  }
+
+  onFilter = (values: FilterPropertyInput) => {
+    this.getProperties(values);
+  };
+
+  onReset() {
+    this.filterForm.reset();
   }
 
   ngOnInit() {

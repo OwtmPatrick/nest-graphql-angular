@@ -1,0 +1,32 @@
+.filter {
+  max-width: 1024px;
+  margin: 0 auto;
+
+  &__form {
+    margin: 0 -16px;
+  }
+
+  &__fields {
+    @media (min-width: 768px) {
+      max-width: calc(50% + 8px);
+    }
+  }
+
+  &__btns-wrapper {
+    height: auto !important;
+  }
+
+  &__btns {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+  }
+}

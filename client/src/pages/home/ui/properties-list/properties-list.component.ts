@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Property } from 'src/entities/property/model';
 
 @Component({
   selector: 'app-properties-list',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./properties-list.component.scss'],
 })
 export class PropertiesListComponent {
-  @Input() properties: any;
+  @Input() properties!: Property[];
 }

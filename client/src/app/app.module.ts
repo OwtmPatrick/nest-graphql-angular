@@ -14,9 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { PropertiesListComponent } from '../pages/home/ui/properties-list/properties-list.component';
+import { FilterComponent } from '../pages/home/ui/filter/filter.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PropertiesListComponent],
+  declarations: [AppComponent, HomeComponent, PropertiesListComponent, FilterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
