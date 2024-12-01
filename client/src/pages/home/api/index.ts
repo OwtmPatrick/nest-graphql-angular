@@ -6,6 +6,10 @@ export const GET_PROPERTIES = gql`
       id
       name
       wifi
+      photo
+      city
+      state
+      laundry
     }
   }
 `;

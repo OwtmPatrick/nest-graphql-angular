@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GET_PROPERTIES } from '../api';
+import { GET_PROPERTIES } from '../../api';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FilterPropertyInput } from 'src/entities/property/model';
+import { Property, FilterPropertyInput } from 'src/entities/property/model';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,8 @@ import { FilterPropertyInput } from 'src/entities/property/model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  properties: Property[] = [];
+
   filterForm = new FormGroup({
     search: new FormControl<string>(''),
     wifi: new FormControl<boolean>(false),
@@ -33,7 +35,13 @@ export class HomeComponent {
         },
       })
       .valueChanges.subscribe((result: any) => {
-        console.log(result);
+        const {
+          data: { properties },
+        } = result;
+
+        console.log(properties)
+
+        this.properties = properties;
       });
   }
 
