@@ -13,11 +13,23 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { PropertiesListComponent } from '../pages/home/ui/properties-list/properties-list.component';
 import { FilterComponent } from '../pages/home/ui/filter/filter.component';
+import { HeaderComponent } from 'src/widgets/header/header.component';
+import { LoginComponent } from 'src/pages/login/ui/login.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BaseUrlInterceptor } from 'src/pages/login/config/BaseUrlInterceptor';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PropertiesListComponent, FilterComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    PropertiesListComponent,
+    FilterComponent,
+    HeaderComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,8 +45,15 @@ import { FilterComponent } from '../pages/home/ui/filter/filter.component';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatToolbarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BaseUrlInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

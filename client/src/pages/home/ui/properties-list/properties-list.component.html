@@ -2,7 +2,9 @@
   <li class="properties-list__property" *ngFor="let property of properties">
     <mat-card>
       <mat-card-header>
-        <mat-card-title class="properties-list__property-title">{{ property.name }}</mat-card-title>
+        <mat-card-title class="properties-list__property-title">{{
+          property.name
+        }}</mat-card-title>
       </mat-card-header>
       <img
         mat-card-image
@@ -14,8 +16,9 @@
         <div class="properties-list__property-location">
           <mat-icon
             aria-hidden="false"
-            aria-label="Example home icon"
+            aria-label="location icon"
             fontIcon="location_on"
+            color="primary"
           ></mat-icon>
 
           {{ property.state }}, {{ property.city }}

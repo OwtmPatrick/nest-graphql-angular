@@ -1,0 +1,30 @@
+<div class="login">
+  <form [formGroup]="loginForm" (submit)="onSubmit()" class="login__form">
+    <mat-card>
+      <mat-card-content>
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <mat-form-field [style.width.%]="100">
+              <input matInput placeholder="Login" formControlName="login" />
+            </mat-form-field>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <mat-form-field [style.width.%]="100">
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+              />
+            </mat-form-field>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <button type="submit" mat-stroked-button color="primary" [style.width.%]="100">
+              Login
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
