@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import {
+  HttpErrorResponse,
+  HttpStatusCode,
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
   HttpEvent,
 } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../api/auth.service';
+import { ResetUser } from 'src/entities/user/state/actions';
 
 const BASE_URL = 'http://localhost:3000';
 
 @Injectable()
 export class BaseUrlInterceptor implements HttpInterceptor {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly store: Store,
+    private readonly router: Router
+  ) {}
 
   intercept<T>(
     request: HttpRequest<T>,
@@ -36,8 +44,8 @@ export class BaseUrlInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === HttpStatusCode.Unauthorized) {
-            // TODO: handle 401
-            // redirect user to the logout page
+            this.store.dispatch(new ResetUser());
+            this.router.navigate(['/']);
           }
         }
         return throwError(err);
