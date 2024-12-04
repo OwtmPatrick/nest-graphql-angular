@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../api/auth.service';
+import { AuthService } from '../../../shared/api/auth.service';
+import { Store } from '@ngrx/store';
+import { SetToken } from 'src/entities/user/state/actions';
+import { keys as localStorageKeys } from 'src/shared/model/localStorage';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +20,15 @@ export class LoginComponent {
     const { login, password } = this.loginForm.value;
 
     if (login && password) {
-      this.authService.login(login, password).subscribe((res) => {
-        console.log(res);
+      this.authService.login(login, password).subscribe(({ accessToken }) => {
+        localStorage.setItem(localStorageKeys.accessToken, accessToken);
+        this.store.dispatch(new SetToken({ accessToken }));
       });
     }
-    // console.log(this.loginForm.value);
   }
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly store: Store<{ user: { accessToken: string | null } }>
+  ) {}
 }

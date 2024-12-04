@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from '../pages/home/ui/home/home.component';
 import { AppRoutingModule } from './routes/routing.module';
-import { GraphQLModule } from './api/graphql.module';
+import { GraphQLModule } from '../shared/api/graphql.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -17,9 +17,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { PropertiesListComponent } from '../pages/home/ui/properties-list/properties-list.component';
 import { FilterComponent } from '../pages/home/ui/filter/filter.component';
 import { HeaderComponent } from 'src/widgets/header/header.component';
+import { RegisternComponent } from 'src/pages/register/ui/register.component';
 import { LoginComponent } from 'src/pages/login/ui/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BaseUrlInterceptor } from 'src/pages/login/config/BaseUrlInterceptor';
+import { BaseUrlInterceptor } from 'src/shared/config/BaseUrlInterceptor';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from '../entities/user/state/reducer';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { BaseUrlInterceptor } from 'src/pages/login/config/BaseUrlInterceptor';
     PropertiesListComponent,
     FilterComponent,
     HeaderComponent,
+    RegisternComponent,
     LoginComponent,
   ],
   imports: [
@@ -46,6 +50,9 @@ import { BaseUrlInterceptor } from 'src/pages/login/config/BaseUrlInterceptor';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
+    // TODO: fix type
+    // @ts-ignore
+    StoreModule.forRoot({ user: userReducer }),
   ],
   providers: [
     {

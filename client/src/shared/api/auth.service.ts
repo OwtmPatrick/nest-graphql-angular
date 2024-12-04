@@ -8,9 +8,15 @@ import { shareReplay } from 'rxjs';
 export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
+  register(login: string, password: string) {
+    return this.http
+      .post<{ accessToken: string }>('/auth/register', { login, password })
+      .pipe(shareReplay());
+  }
+
   login(login: string, password: string) {
     return this.http
-      .post<any>('/auth/login', { login, password })
+      .post<{ accessToken: string }>('/auth/login', { login, password })
       .pipe(shareReplay());
   }
 }
