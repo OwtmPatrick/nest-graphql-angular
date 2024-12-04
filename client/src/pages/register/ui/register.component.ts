@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/shared/api/auth.service';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { keys as localStorageKeys } from 'src/shared/model/localStorage';
 import { SetToken } from 'src/entities/user/state/actions';
+import { User } from 'src/entities/user/model';
 
 @Component({
   selector: 'app-register',
@@ -32,6 +32,8 @@ export class RegisternComponent {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly store: Store<{ user: { accessToken: string | null } }>
+    private readonly store: Store<{
+      user: User & { accessToken: string | null };
+    }>
   ) {}
 }

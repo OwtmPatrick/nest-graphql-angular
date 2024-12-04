@@ -4,6 +4,7 @@ import { AuthService } from '../../../shared/api/auth.service';
 import { Store } from '@ngrx/store';
 import { SetToken } from 'src/entities/user/state/actions';
 import { keys as localStorageKeys } from 'src/shared/model/localStorage';
+import { User } from 'src/entities/user/model';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,8 @@ export class LoginComponent {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly store: Store<{ user: { accessToken: string | null } }>
+    private readonly store: Store<{
+      user: User & { accessToken: string | null };
+    }>
   ) {}
 }

@@ -1,35 +1,31 @@
 import {
   Controller,
   Get,
-  //   Post,
   Body,
   Patch,
   Param,
   Delete,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-// import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-// import * as bcrypt from 'bcrypt';
 import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  //   @Post('')
-  //   async create(@Body() { login, password }: CreateUserDto) {
-  //     const saltOrRounds = 10;
-  //     const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-
-  //     return await this.usersService.create({ login, password: hashedPassword });
-  //   }
-
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('me')
+  getProfile(@Request() req) {
+    return this.usersService.findOne(req.user.sub);
   }
 
   @UseGuards(AuthGuard)
